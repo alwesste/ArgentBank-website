@@ -1,23 +1,45 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import Accueil from './pages/Accueil/accueil';
+import User from './pages/User/user';
+import SignIn from './pages/SignIn/signIn';
+import Layout from './components/Layout/layout';
+
+const GlobalStyle = createGlobalStyle`
+
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  html {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+`;
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/accueil" element={ 'ceci est le texte de accueil' }></Route>
-        <Route path="/sign-in" element={ 'ceci est le texte de sign in' }></Route>
-        <Route path="/user" element={ 'ceci est le texte de user' }></Route>
-      </Routes>
+      <GlobalStyle />
+      <Layout>
+        <Routes>
+          <Route path="/accueil" element={ <Accueil /> } />
+          <Route path="/sign-in" element={ <User /> } />
+          <Route path="/user" element={ <SignIn /> } />
+        </Routes>
+      </Layout>
     </Router>
   );
 };
 
 const container =  document.getElementById('root')
 const root = createRoot(container)
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+root.render (<App />)
