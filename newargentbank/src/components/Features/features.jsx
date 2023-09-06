@@ -6,7 +6,7 @@ function Features({title, text, source}) {
         <img
           src={source}
           alt="Chat Icon"
-          class="feature-icon"
+          className="feature-icon"
         />
         <h3 className="feature-item-title">{title}</h3>
         <p>
