@@ -31,7 +31,7 @@ const App = () => {
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route path="/accueil" element={ <Accueil /> } />
+          <Route path="/" element={ <Accueil /> } />
           <Route path="/sign-in" element={ <User /> } />
           <Route path="/user" element={ <SignIn /> } />
         </Routes>
