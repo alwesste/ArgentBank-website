@@ -12,9 +12,16 @@ function User() {
 
     return(
         <>
-            {accounts.map((account, index) => (
-                <Account key={index} text={account.text} amount={account.amount} balanceType={account.balanceType}/>
-            ))}
+            <div className='bg-dark'>
+                <div className="header">
+                    <h1>Welcome back<br/>Tony Jarvis!</h1>
+                    <button className="edit-button">Edit Name</button>
+                </div>
+                
+                {accounts.map((account, index) => (
+                    <Account key={index} text={account.text} amount={account.amount} balanceType={account.balanceType}/>
+                ))}
+            </div>
         </>
     )
 }

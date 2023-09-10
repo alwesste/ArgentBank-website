@@ -2,6 +2,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
+import store from './store'; 
+import { Provider } from 'react-redux'
 import Accueil from './pages/Accueil/accueil';
 import User from './pages/User/user';
 import SignIn from './pages/SignIn/signIn';
@@ -42,4 +44,10 @@ const App = () => {
 
 const container =  document.getElementById('root')
 const root = createRoot(container)
-root.render (<App />)
+root.render (
+
+  <Provider store={store}>
+    <App />
+  </Provider>
+  
+  )
