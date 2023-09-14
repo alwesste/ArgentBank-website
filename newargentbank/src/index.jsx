@@ -3,11 +3,13 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import store from './store'; 
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import Accueil from './pages/Accueil/accueil';
 import User from './pages/User/user';
 import SignIn from './pages/SignIn/signIn';
 import Layout from './components/Layout/layout';
+import Error from './pages/Error/error';
+import { selectToken } from './selector';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -34,13 +36,23 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path="/" element={ <Accueil /> } />
-          <Route path="/user" element={ <User /> } />
+          <Route path="/user" element={ <PrivateRouteUser /> } />
           <Route path="/signIn" element={ <SignIn /> } />
+          <Route path="*" element={ <Error />}  />
         </Routes>
       </Layout>
     </Router>
   );
 };
+
+const PrivateRouteUser = () => {
+  const token = useSelector(selectToken)
+
+  if (!token) {
+      return <Accueil />
+  }
+      return <User />
+}
 
 const container =  document.getElementById('root')
 const root = createRoot(container)

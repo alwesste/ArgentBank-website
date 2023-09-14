@@ -6,3 +6,5 @@ const store = configureStore({ reducer: {
 } })
 
 export default store;   
+
+console.log('Contenu complet du store :', store.getState());

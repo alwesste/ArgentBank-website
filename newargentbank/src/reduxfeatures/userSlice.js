@@ -1,62 +1,52 @@
-// userSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { authorisationAPI } from './authAPI';
+import store from '../store';
 
 const userSlice = createSlice({
-    name: 'user',
-    initialState: {
-      user: null, 
-      isLoading: false, 
-      error: null, 
-      isLoggedIn: false, 
+  name: 'user',
+  initialState: {
+    firstName: null,
+    lastName: null,
+    isLoading: false,
+    error: null,
+    isLoggedIn: false,
+    token: null,
+  },
+  reducers: {
+    setUser: (state, action) => {
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
     },
-    reducers: {
-      setUser: (state, action) => {
-        state.user = action.payload;
-        state.isLoggedIn = true;
-      },
-      clearUser: (state) => {
-        state.user = null;
-        state.isLoggedIn = false;
-      },
+    clearUser: (state) => {
+      state.user = null;
+      state.isLoggedIn = false;
     },
-    
-    extraReducers: (builder) => {
-        builder
-          .addCase(loginUser.pending, (state) => {
-            state.isLoading = true;
-            state.error = null;
-          })
-          .addCase(loginUser.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.user = action.payload;
-            state.isLoggedIn = true;
-          })
-          .addCase(loginUser.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.error.message;
-            state.isLoggedIn = false;
-          });
-      },    
-  });
-  
-  export const { setUser, clearUser } = userSlice.actions;
-  
-  export default userSlice.reducer;
-  
-  export const loginUser = createAsyncThunk('user/login', async (credentials) => {
-    try {
-      // Effectuez ici votre logique de connexion, par exemple une requête API.
-      const response = await authorisationAPI(credentials);
-      console.log('response de cresaeasyncthunk', response)
-  
-      // Si la connexion réussit, retournez les données de l'utilisateur.
-      return response;
-    } catch (error) {
-      // En cas d'erreur, lancez une exception pour que Redux Toolkit gère les erreurs.
-      console.log('looks like a damn mistake')
-      throw error;
+    setToken: (state, action) => {
+      state.token = action.payload
+      state.isLoggedIn = true;
     }
-  });
+  },
+});
 
-  
+export const { setUser, clearUser, setToken } = userSlice.actions;
+
+export default userSlice.reducer;
+
+export const loginUser = createAsyncThunk('user/login', async (credentials, { dispatch }) => {
+  try {
+    const response = await authorisationAPI(credentials);
+    console.log('response de createAsyncThunk', response);
+
+    if (response.status === 200) {
+      dispatch(setToken(response.body.token))
+      console.log('new store:', store.getState());
+
+    } else {
+      console.error('Login failed');
+    }
+    return response;
+  } catch (error) {
+    console.log('looks like a damn mistake');
+    throw error;
+  }
+});

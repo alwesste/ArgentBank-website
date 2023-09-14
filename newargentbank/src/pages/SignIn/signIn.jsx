@@ -1,33 +1,30 @@
 import './signIn.scss'
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; // Importez useSelector depuis react-redux
+import { useDispatch, useSelector } from 'react-redux'; 
 import { loginUser } from '../../reduxfeatures/userSlice';
 import { Navigate } from 'react-router-dom';
+import { selectIsLoggedIn } from '../../selector';
 
 function SignIn() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
 
     try {
-      // Dispatchez l'action loginUser avec les informations d'identification.
-      await dispatch(loginUser(credentials));
-      console.log('loginuser',loginUser)
+      dispatch(loginUser(credentials));
+
     } catch (error) {
-      // Gérez les erreurs de connexion ici.
       console.error('Erreur de connexion :', error);
     }
   };
-
-  // Utilisez l'état de l'utilisateur pour vérifier la connexion.
 
 
   return (
@@ -64,8 +61,7 @@ function SignIn() {
             Sign In
           </button>
         </form>
-        {/* Redirigez l'utilisateur vers "/user" après la connexion réussie. */}
-        {isLoggedIn && <Navigate to="/user" />} {/* Utilisation de Navigate */}
+        {isLoggedIn && <Navigate to="/user" />}
       </section>
     </main>
   );
