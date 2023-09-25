@@ -16,6 +16,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^5.9.21",
     "react-router-dom": "^6.15.0",
+    "redux-thunk": "^2.4.2",
     "styled-components": "^6.0.7",
     "swagger-ui-express": "^4.1.4",
     "yamljs": "^0.3.0"

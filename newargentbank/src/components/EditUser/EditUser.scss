@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+
+    &-button {
+        border: none;
+
+        button {
+            background-color: rgb(96, 174, 96);
+            border: none;
+            margin: 10px;
+            padding: 15px;
+            width: 130px;
+            border-radius: 5px;
+            color: white;
+
+        }
+    }
+    
+    
+    & input {
+        padding: 5px;
+        font-size: 1rem;
+        margin-left: 10px;
+    }
+}
+
+.title {
+    font-weight: 400;
+}
+
+
+.disable {
+    background-color: #f0f0f0; 
+    color: #777; 
+    cursor: not-allowed; 
+    border: none;
+}

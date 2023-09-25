@@ -1,13 +1,11 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { authorisationAPI } from './authAPI';
-import store from '../store';
+import { createSlice } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
+    userName: null,
     firstName: null,
     lastName: null,
-    isLoading: false,
     error: null,
     isLoggedIn: false,
     token: null,
@@ -17,8 +15,11 @@ const userSlice = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
     },
+    setUserName: (state, action) => {
+      state.userName = action.payload.userName
+    },
     clearUser: (state) => {
-      state.user = null;
+      state.token = null;
       state.isLoggedIn = false;
     },
     setToken: (state, action) => {
@@ -28,25 +29,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser, setToken } = userSlice.actions;
+export const { setUser, clearUser, setToken, setUserName } = userSlice.actions;
 
 export default userSlice.reducer;
-
-export const loginUser = createAsyncThunk('user/login', async (credentials, { dispatch }) => {
-  try {
-    const response = await authorisationAPI(credentials);
-    console.log('response de createAsyncThunk', response);
-
-    if (response.status === 200) {
-      dispatch(setToken(response.body.token))
-      console.log('new store:', store.getState());
-
-    } else {
-      console.error('Login failed');
-    }
-    return response;
-  } catch (error) {
-    console.log('looks like a damn mistake');
-    throw error;
-  }
-});

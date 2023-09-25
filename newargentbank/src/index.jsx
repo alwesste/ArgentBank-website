@@ -51,7 +51,7 @@ const PrivateRouteUser = () => {
   if (!token) {
       return <Accueil />
   }
-      return <User />
+  return <User />
 }
 
 const container =  document.getElementById('root')

@@ -1,16 +1,25 @@
 import './user.scss'
 import Account from '../../components/account/account'
-import { useEffect } from 'react';
-import { profileAPI } from '../../reduxfeatures/authAPI';
+import { useEffect, useState } from 'react';
+import { profileAPI } from '../../authAPI';
 import { setUser } from '../../reduxfeatures/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFirstName, selectLastName, selectToken  } from '../../selector';
+import EditUser from '../../components/EditUser/EditUser';
+
 
 import store from '../../store';
 
 
 function User() {
 
+
+    const [editUserOn, setEditUserOn] = useState(false)
+
+    function handleEdit(e) {
+        e.preventDefault()
+        setEditUserOn(!editUserOn)
+    }
     const accounts = [
         { text: 'Checking (x8349)', amount: 2082.79, balanceType: 'available' },
         { text: 'Savings (x6712)', amount: 10928.42, balanceType: 'available' },
@@ -29,18 +38,20 @@ function User() {
         profileAPI(token)
 
         .then(data => {
-            const { firstName, lastName } = data.body;
-             dispatch(setUser({firstName, lastName}));
+            const { firstName, lastName, userName } = data.body;
+            console.log(data.body)
+            dispatch(setUser({firstName, lastName, userName}));
         })
         
     },[token, dispatch])
 
     return(
         <>
+            {editUserOn && <EditUser />}
             <div className='bg-dark'>
                 <div className="header">
                     <h1>Welcome back<br/>{firstName} {lastName} !</h1>
-                    <button className="edit-button">Edit Name</button>
+                    <button className="edit-button" onClick={handleEdit}>Edit Name</button>
                 </div>
                 
                 {accounts.map((account, index) => (

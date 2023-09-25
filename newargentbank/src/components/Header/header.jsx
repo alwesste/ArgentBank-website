@@ -3,13 +3,13 @@ import argentBankLogo from '../../designs/img/argentBankLogo.png'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../reduxfeatures/userSlice';
-import {selectIsLoggedIn, selectFirstName} from '../../selector'
+import {selectIsLoggedIn, selectUserName} from '../../selector'
 
 
 function Header() {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const firstName = useSelector(selectFirstName)
+  const userName = useSelector(selectUserName)
   
   const dispatch = useDispatch()
 
@@ -32,7 +32,7 @@ function Header() {
       {isLoggedIn && 
       <Link className="main-nav-item">
           <i className="fa fa-user-circle"></i>
-          {firstName}
+          {userName}
       </Link>
 }
       {isLoggedIn ? (
