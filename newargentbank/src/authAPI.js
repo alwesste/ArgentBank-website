@@ -70,6 +70,7 @@ export const loginUser = (credentials) => async (dispatch) => {
 
 
 export const updateUserName = async(token, newUsername) => {
+  
   try {
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: 'PUT',

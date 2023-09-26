@@ -47,6 +47,9 @@ function SignIn() {
                 name="email"
                 value={credentials.email}
                 onChange={handleInputChange}
+                autoComplete="email"
+                required
+
               />
             </div>
             <div className="input-wrapper">
@@ -57,6 +60,9 @@ function SignIn() {
                 name="password"
                 value={credentials.password}
                 onChange={handleInputChange}
+                autoComplete="current-password"
+                required
+
               />
             </div>
             <div className="input-remember">

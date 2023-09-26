@@ -24,6 +24,7 @@ function EditUser () {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        
         try {
             const response = await updateUserName(token, usernameValue);
             
@@ -49,6 +50,8 @@ function EditUser () {
                     value={usernameValue || ""}
                     onChange={(e) => setusernameValue(e.target.value)}
                     placeholder={username}
+                    minLength={5}
+                    autoComplete="username"
                     />
                 </label>
 

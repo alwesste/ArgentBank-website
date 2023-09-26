@@ -1,18 +1,17 @@
 import './user.scss'
-import Account from '../../components/account/account'
+import Account from '../../components/account/account';
+import EditUser from '../../components/EditUser/EditUser';
+import store from '../../store';
+
+import { accounts } from '../../utils/variable';
 import { useEffect, useState } from 'react';
 import { profileAPI } from '../../authAPI';
 import { setUser } from '../../reduxfeatures/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFirstName, selectLastName, selectToken  } from '../../selector';
-import EditUser from '../../components/EditUser/EditUser';
-
-
-import store from '../../store';
 
 
 function User() {
-
 
     const [editUserOn, setEditUserOn] = useState(false)
 
@@ -20,11 +19,6 @@ function User() {
         e.preventDefault()
         setEditUserOn(!editUserOn)
     }
-    const accounts = [
-        { text: 'Checking (x8349)', amount: 2082.79, balanceType: 'available' },
-        { text: 'Savings (x6712)', amount: 10928.42, balanceType: 'available' },
-        { text: 'Credit Card (x8349)', amount: 184.20, balanceType: 'current' },
-      ];
     
     const dispatch = useDispatch()
     
@@ -48,6 +42,7 @@ function User() {
     return(
         <>
             {editUserOn && <EditUser />}
+
             <div className='bg-dark'>
                 <div className="header">
                     <h1>Welcome back<br/>{firstName} {lastName} !</h1>
@@ -56,7 +51,10 @@ function User() {
                 
                 {accounts.map((account, index) => (
                     <Account key={index} text={account.text} amount={account.amount} balanceType={account.balanceType}/>
-                ))}
+                ))} 
+
+          
+                
             </div>
         </>
     )
