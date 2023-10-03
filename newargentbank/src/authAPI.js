@@ -50,7 +50,7 @@ export async function profileAPI(token) {
 
 
 
-export const loginUser = (credentials) => async (dispatch) => {
+export const loginUser = (credentials, ) => async (dispatch) => {
   try {
     const response = await authorisationAPI(credentials);
     console.log('response de loginUser', response);

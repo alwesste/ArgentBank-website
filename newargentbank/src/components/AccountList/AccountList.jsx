@@ -6,13 +6,11 @@ const AccountList = ({date, description, amount, balance, transactionType, categ
 const [ drop, setdrop] = useState(false)  
 const [isEditingCategory, setIsEditingCategory] = useState(false);
 const [isEditingNote, setIsEditingNote] = useState(false);
-const [editedCategory, setEditedCategory] = useState(category);
 const [editedNote, setEditedNote] = useState(note);
 
 function handledrop() {
     setdrop(!drop)
 }
-
 
     return (
         <>
@@ -28,21 +26,24 @@ function handledrop() {
                 <div className={`list-detail ${drop && 'appear'}`}>
                     <div className="list-detail-transaction">
                         <p>Transaction type </p>
-                        <p className="space">{transactionType}</p>
+                        <p className="list-detail-specification">{transactionType}</p>
                     </div> 
                     <div className="list-detail-transaction">
                         <p>Category</p>
 
                         {isEditingCategory ? (
                         <>
-                            <input
-                            type="text"
-                            value={editedCategory}
-                            onChange={(e) => setEditedCategory(e.target.value)}
-                            />
+                            <select name="category" className="select-element" > 
+                                <option value=""></option>
+                                <option value="Food">Food</option>
+                                <option value="Clothes">Clothes</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="Rent">Rent</option>
+
+                            </select>
                         </>
                         ) : (
-                        <p className="space">
+                        <p className="list-detail-specification">
                             {category}
                             <i className="fa-solid fa-pen" onClick={() => setIsEditingCategory(true) }></i>
                         </p>
@@ -54,13 +55,15 @@ function handledrop() {
                         {isEditingNote ? (
                         <>
                             <input
+                            className="input-element"
                             type="text"
                             value={editedNote}
                             onChange={(e) => setEditedNote(e.target.value)}
+                            minLength={10}
                             />
                         </>
                         ) : (
-                        <p className="space">
+                        <p className="list-detail-specification">
                             {note} <i className="fa-solid fa-pen" onClick={() => setIsEditingNote(true)}></i>
                         </p>
                         )}

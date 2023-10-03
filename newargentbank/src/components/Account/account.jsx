@@ -29,21 +29,23 @@ function Account({amount, text, balanceType}) {
         </section>
         
         <div className='accountList'>
-              
-              {listDisplay &&  (
-    
-               <AccountList
-                    // key={index} 
-                    date={accountList[0].date} 
-                    description={accountList[0].description} 
-                    amount={accountList[0].amount} 
-                    balance={accountList[0].balance}
-                    transactionType={itemDescription.transactionType}
-                    category={itemDescription.category}
-                    note={itemDescription.note}
-                />        
-              )}
-        </div>
+        {listDisplay && (
+          <>
+            {accountList.slice(0, 3).map((account, index) => (
+              <AccountList
+                key={index}
+                date={account.date}
+                description={account.description}
+                amount={account.amount}
+                balance={account.balance}
+                transactionType={itemDescription.transactionType}
+                category={itemDescription.category}
+                note={itemDescription.note}
+              />
+            ))}
+          </>
+        )}
+      </div>
         
       </>
     )

@@ -1,14 +1,14 @@
 .list {
     display: flex;
-    flex-direction: center;
     justify-content: space-around;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(212, 189, 189);
     height: 30px;
     margin: 0 auto;
     width: 80%;
     color: black;
     align-items: center;
     border-radius: 3px;
+    margin-bottom: -30px;
 
     &-detail {
         text-align: left;
@@ -18,14 +18,22 @@
         border-radius: 0 0 3px 3px;
         margin-top: -5px;
         margin-bottom: 30px;
-        max-height: 0px;
         line-height: 5px;
-        visibility: hidden;
         padding-top: 15px;
+        max-height: 0;
+        visibility: hidden;
+        overflow: hidden;
+
 
         &-transaction {
             display: flex;
-            margin-left: 47px;
+            margin-left: 5%;
+            gap: 20%;
+        }
+
+        &-specification {
+            position: absolute;
+            left: 34%;
         }
     }
 }
@@ -40,13 +48,17 @@
     left: 20px;
 }
 
-.space {
-    position: absolute;
-    left: 320px;
-}
 
 .appear {
     visibility: visible;
     max-height: 300px;
-    transition: max-height 0.5s;
+    transition: max-height .5s;
+
+}
+
+.select-element, .input-element {
+    width: 120px;
+    position: absolute;
+    left: 34%;
+    margin-top: 10px;
 }

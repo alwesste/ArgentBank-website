@@ -6,8 +6,8 @@ export const accounts = [
 
 export const accountList = [
     { date: "27/02/2023", description: "Golden Sun Bakery", amount: 8.00, balance: 298.00 },
-    { date: "27/02/2023", description: "Golden Sun Bakery", amount: 8.00, balance: 298.00 },
-    { date: "27/02/2023", description: "Golden Sun Bakery", amount: 8.00, balance: 298.00 },
+    { date: "26/02/2023", description: "freshCream Forever", amount: 8.00, balance: 298.00 },
+    { date: "25/02/2023", description: "Banana Split World", amount: 8.00, balance: 298.00 },
     { date: "27/02/2023", description: "Golden Sun Bakery", amount: 8.00, balance: 298.00 }
 ]
 
