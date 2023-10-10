@@ -9,13 +9,11 @@ export async function authorisationAPI(credentials) {
         },
         body: JSON.stringify(credentials),
       });
-          console.log('credentials',credentials)
 
       if (!response.ok) {
         const errorResponse = await response.json()
         throw new Error(errorResponse.message);
       }
-  
       return response.json();
 
     } catch (error) {
@@ -50,10 +48,9 @@ export async function profileAPI(token) {
 
 
 
-export const loginUser = (credentials, ) => async (dispatch) => {
+export const loginUser = (credentials ) => async (dispatch) => {
   try {
     const response = await authorisationAPI(credentials);
-    console.log('response de loginUser', response);
 
     if (response.status === 200) {
       dispatch(setToken(response.body.token));
@@ -63,7 +60,7 @@ export const loginUser = (credentials, ) => async (dispatch) => {
     }
     return response;
   } catch (error) {
-    console.log('looks like a damn mistake');
+
     throw error;
   }
 }
@@ -81,13 +78,10 @@ export const updateUserName = async(token, newUsername) => {
 
       body: JSON.stringify({userName: newUsername}),
       
-
     });
 
     if(response.status === 200) {
       const data = await response.json();
-      console.log("ok la fonction passe dans son ensemble", newUsername)
-      console.log('data',data)
       return data
      } 
   } catch (error) {
